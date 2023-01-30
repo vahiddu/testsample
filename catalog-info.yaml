@@ -1,0 +1,42 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage
+  description: An example of a Backstage application.
+  # Example for optional annotations
+  # annotations:
+  #   github.com/project-slug: backstage/backstage
+  #   backstage.io/techdocs-ref: dir:.
+spec:
+  type: website
+  owner: john@example.com
+  lifecycle: experimental
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  annotations:
+    backstage.io/kubernetes-id: devx-k8s-qa
+  name: devx-k8s-qa
+spec:
+  lifecycle: QA
+  owner: devx
+  type: service
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+    name: backstage #buraya bagli olarak k8s kaynaklarını buluyor
+    annotations:
+        gitlab.com/project-id: '5224' #1234. This must be in quotes and can be found under Settings --> General
+        # or
+        #gitlab.com/project-slug: 'devx/backstage' # group_name/project_name
+        # You can change the CODEOWNERS path
+        # if it is not passed default specified in `app-config.yaml` is used
+        #gitlab.com/codeowners-path: 'devx'
+        backstage.io/kubernetes-id: backstage
+spec:
+    type: service #Note: spec.type can take values in ['website','library','service'] but to render GitLab Entity, Catalog must be of type service
+    lifecycle: QA
+    owner: devx
